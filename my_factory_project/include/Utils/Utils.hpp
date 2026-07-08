@@ -1,10 +1,3 @@
-/*
-** 2026
-** my_factory
-** File description:
-** Utils.hpp
-*/
-
 #ifndef UTILS_HPP
     #define UTILS_HPP
 
@@ -24,8 +17,10 @@
         float z;
     };
 
-    #define ERROR 84
-    #define NOERROR 0
+    enum OUTPUT {
+        ERROR = 84,
+        NOERROR = 0,
+    };
 
     #define DEFAULT 0
 
@@ -34,6 +29,7 @@
     #define UNKNOWN -1
 
     #define MSG(msg) std::cout << msg << std::endl
+    #define ERR(msg) std::cerr << msg << std::endl
 
 int conditions(int argc, char *argv[]);
 

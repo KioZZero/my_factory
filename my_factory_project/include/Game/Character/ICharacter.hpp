@@ -1,10 +1,3 @@
-/*
-** 2026
-** my_factory
-** File description:
-** ICharacter.hpp
-*/
-
 #ifndef ICHARACTER_HPP
     #define ICHARACTER_HPP
 

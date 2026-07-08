@@ -1,10 +1,3 @@
-/*
-** 2026
-** my_factory
-** File description:
-** PlayerCharacter.hpp
-*/
-
 #ifndef PLAYERCHARACTER_HPP
     #define PLAYERCHARACTER_HPP
 

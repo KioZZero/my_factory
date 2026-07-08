@@ -1,10 +1,3 @@
-/*
-** 2026
-** my_factory
-** File description:
-** ACharacter.hpp
-*/
-
 #ifndef ACHARACTER_HPP
     #define ACHARACTER_HPP
 
@@ -16,8 +9,15 @@ namespace MyFactory::Character
     {
         protected:
             int _id = DEFAULT;
-            Axis_t position;
             std::string _name;
+
+            Axis_t _position;
+        public:
+            ACharacter();
+            ACharacter(std::string name);
+            ACharacter(std::string name, Axis_t position);
+            ~ACharacter() = default;
+
     };
 }
 

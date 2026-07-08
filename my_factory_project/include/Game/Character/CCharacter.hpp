@@ -1,10 +1,3 @@
-/*
-** 2026
-** my_factory
-** File description:
-** CCharacter.hpp
-*/
-
 #ifndef CCHARACTER_HPP
     #define CCHARACTER_HPP
 

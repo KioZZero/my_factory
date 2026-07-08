@@ -1,23 +1,20 @@
-/*
-** 2026
-** my_factory
-** File description:
-** Server.hpp
-*/
-
 #ifndef SERVER_HPP
     #define SERVER_HPP
 
+#include "Utils.hpp"
+
 namespace Factory::Server
 {
-    class Server
+    class ServerManager
     {
         private:
-        
+            std::string _host;
+            int _port;
         public:
-            Server() = default;
-            ~Server() = default;
+            ServerManager();
+            ~ServerManager() = default;
             
+            int init(std::string host, int port);
             int run();
             void getEvents();
     };

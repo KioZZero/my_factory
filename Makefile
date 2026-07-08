@@ -7,20 +7,21 @@ INCLUDE_DIR		=	$(PROJECT_DIR)/include
 SOURCE_DIR		=	$(PROJECT_DIR)/source
 
 INCLUDE_DIRS	=	$(INCLUDE_DIR) \
-					$(INCLUDE_DIR)/Character \
+					$(INCLUDE_DIR)/Game/Character \
+					$(INCLUDE_DIR)/Game/Component \
 					$(INCLUDE_DIR)/Core \
 					$(INCLUDE_DIR)/Utils \
 
 SOURCES_FILES	=	$(SOURCE_DIR)/main.cpp \
 					$(SOURCE_DIR)/conditions.cpp \
-					$(SOURCE_DIR)/Character/PlayerCharacter.cpp \
-					$(SOURCE_DIR)/Character/OtherCharacter.cpp \
-					$(SOURCE_DIR)/Character/ACharacter.cpp \
-					$(SOURCE_DIR)/Character/CCharacter.cpp \
-					$(SOURCE_DIR)/Core.cpp \
-
-
-# Object files
+					$(SOURCE_DIR)/Core/Core.cpp \
+					$(SOURCE_DIR)/Core/Parser.cpp \
+					$(SOURCE_DIR)/Core/Preloader.cpp \
+					$(SOURCE_DIR)/Core/Server.cpp \
+					$(SOURCE_DIR)/Game/Character/ACharacter.cpp \
+					$(SOURCE_DIR)/Game/Character/CCharacter.cpp \
+					$(SOURCE_DIR)/Game/Character/OtherCharacter.cpp \
+					$(SOURCE_DIR)/Game/Character/PlayerCharacter.cpp \
 
 NAME			=	my_factory
 

@@ -1,10 +1,3 @@
-/*
-** 2026
-** my_factory
-** File description:
-** OtherCharacter.hpp
-*/
-
 #ifndef OTHERCHARACTER_HPP
     #define OTHERCHARACTER_HPP
 
