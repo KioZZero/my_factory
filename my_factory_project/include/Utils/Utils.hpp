@@ -9,7 +9,7 @@
     
     struct Axis_t
     {
-        Axis_t() : x(0.0f), y(0.0f), z(0.0f) {}
+        Axis_t() : x(0.f), y(0.f), z(0.f) {}
         Axis_t(float x, float y, float z) : x(x), y(y), z(z) {}
 
         float x;
@@ -21,6 +21,14 @@
         ERROR = 84,
         NOERROR = 0,
     };
+
+    #define PROJECT_NAME "Factory"
+    #define PROJECT_MAJOR "0"
+    #define PROJECT_MINOR "0"
+    #define PROJECT_PATCH "0"
+    #define PROJECT_BUILD "0"
+    #define PROJECT_VERSION PROJECT_MAJOR "." PROJECT_MINOR "." PROJECT_PATCH "." PROJECT_BUILD
+    #define PROJECT_TITLE PROJECT_NAME " " PROJECT_VERSION
 
     #define DEFAULT 0
 
