@@ -2,6 +2,11 @@
 
 namespace Factory::Core
 {
+    namespace
+    {
+        Log::LogManager& logger = Log::LogManager::instance();
+    }
+
     Core::Core() : _server(std::make_unique<Factory::Server::ServerManager>()),
                    _preloader(std::make_unique<Factory::Preloader::PreloaderManager>()),
                    _sfmlManager(std::make_unique<Factory::SFML::SFMLManager>()) {}
@@ -9,35 +14,29 @@ namespace Factory::Core
     int Core::init(std::string host, int port)
     {
         try {
-            _logManager = std::make_unique<Log::LogManager>();
-        } catch (const std::exception &e) {
-            ERR(NAME << " Log manager init failed: " << e.what());
-            return OUTPUT::ERROR;
-        }
-        try {
             _server = std::make_unique<Factory::Server::ServerManager>();
             _server->init(host, port);
-            _logManager->log("SYSTEM", "Server initialized successfully");
-        } catch (const std::exception &e) {
-            _logManager->log("SYSTEM", "Server init failed", e);
+            logger.log("SYSTEM", "Server initialized successfully");
+        } catch (const std::exception& e) {
+            logger.log("SYSTEM", "Server init failed", e);
             ERR(NAME << " Server init failed: " << e.what());
             return OUTPUT::ERROR;
         }
         try {
             _preloader = std::make_unique<Factory::Preloader::PreloaderManager>();
             _preloader->init();
-            _logManager->log("SYSTEM", "Preloader initialized successfully");
-        } catch (const std::exception &e) {
-            _logManager->log("SYSTEM", "Preloader init failed", e);
+            logger.log("SYSTEM", "Preloader initialized successfully");
+        } catch (const std::exception& e) {
+            logger.log("SYSTEM", "Preloader init failed", e);
             ERR(NAME << " Preloader init failed: " << e.what());
             return OUTPUT::ERROR;
         }
         try {
             _sfmlManager = std::make_unique<Factory::SFML::SFMLManager>();
             _sfmlManager->init();
-            _logManager->log("SYSTEM", "SFML manager initialized successfully");
-        } catch (const std::exception &e) {
-            _logManager->log("SYSTEM", "SFML manager init failed", e);
+            logger.log("SYSTEM", "SFML manager initialized successfully");
+        } catch (const std::exception& e) {
+            logger.log("SYSTEM", "SFML manager init failed", e);
             ERR(NAME << " SFML manager init failed: " << e.what());
             return OUTPUT::ERROR;
         }
@@ -46,15 +45,26 @@ namespace Factory::Core
 
     int Core::run(std::string host, int port)
     {
-        init(host, port);
-
+        if (init(host, port) != OUTPUT::NOERROR) {
+            ERR(NAME << " Failed to initialize core");
+            return OUTPUT::ERROR;
+        }
         MSG(NAME << " Running...");
-
         return loop();
+    }
+
+    void Core::manageInput(void)
+    {
+        _sfmlManager->getInput();
     }
 
     int Core::loop(void)
     {
+        while (LOOP)
+        {
+            manageInput();
+        }
+
         MSG(NAME << " Stopping...");
         return OUTPUT::NOERROR;
     }

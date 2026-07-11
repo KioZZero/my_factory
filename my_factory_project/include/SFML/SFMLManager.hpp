@@ -4,6 +4,7 @@
 #include "Utils.hpp"
 
 #include "SimplifiedSFML.hpp"
+#include "LogManager.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>

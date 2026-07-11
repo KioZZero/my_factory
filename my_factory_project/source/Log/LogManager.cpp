@@ -2,15 +2,24 @@
 
 namespace Log
 {
-    void LogManager::writeLog(const std::string& message)
+    LogManager& LogManager::instance()
     {
-        _logs << message << std::endl;
+        static LogManager logger;
+        return logger;
     }
 
-    std::string LogManager::getTimeString(void)
+    void LogManager::writeLog(const std::string& message)
     {
-        auto time = std::time(nullptr);
-        auto local_time = *std::localtime(&time);
+        if (_logs.is_open())
+        {
+            _logs << message << std::endl;
+        }
+    }
+
+    std::string LogManager::getTimeString()
+    {
+        const auto time = std::time(nullptr);
+        const auto local_time = *std::localtime(&time);
 
         std::ostringstream out;
         out << std::put_time(&local_time, "%d/%m/%Y - %H:%M:%S");
@@ -20,21 +29,22 @@ namespace Log
 
     LogManager::LogManager()
     {
-        _logs = std::ofstream();
-
         auto time = std::time(nullptr);
         auto local_time = *std::localtime(&time);
 
         std::ostringstream out;
         out << std::put_time(&local_time, "%d_%m_%Y-%H_%M_%S");
 
-        std::string log_file_name = "general_logs-" + out.str() + ".log";
+        const std::string log_file_name = "general_logs-" + out.str() + ".log";
         _logs.open(log_file_name);
     }
 
     LogManager::~LogManager()
     {
-        _logs.close();
+        if (_logs.is_open())
+        {
+            _logs.close();
+        }
     }
 
     void LogManager::log(const std::string& message)
@@ -44,10 +54,11 @@ namespace Log
         writeLog(out.str());
     }
 
-    void LogManager::log(const std::string& message, const std::exception &e)
+    void LogManager::log(const std::string& message, const std::exception& e)
     {
         std::ostringstream out;
-        out << getTimeString() << " | " << "?USER?" << " | " << message << " | Exception: " << e.what();
+        out << getTimeString() << " | " << "?USER?" << " | " << message
+            << " | Exception: " << e.what();
         writeLog(out.str());
     }
 
@@ -58,10 +69,11 @@ namespace Log
         writeLog(out.str());
     }
 
-    void LogManager::log(std::string user,const std::string& message, const std::exception &e)
+    void LogManager::log(std::string user, const std::string& message, const std::exception& e)
     {
         std::ostringstream out;
-        out << getTimeString() << " | " << user << " | " << message << " | Exception: " << e.what();
+        out << getTimeString() << " | " << user << " | " << message
+            << " | Exception: " << e.what();
         writeLog(out.str());
     }
 }
