@@ -1,5 +1,7 @@
 #include "LogManager.hpp"
 
+#define LOG_FOLDER_PATH "logs/"
+
 namespace Log
 {
     LogManager& LogManager::instance()
@@ -12,7 +14,7 @@ namespace Log
     {
         if (_logs.is_open())
         {
-            _logs << message << std::endl;
+            _logs << message;
         }
     }
 
@@ -35,14 +37,16 @@ namespace Log
         std::ostringstream out;
         out << std::put_time(&local_time, "%d_%m_%Y-%H_%M_%S");
 
-        const std::string log_file_name = "general_logs-" + out.str() + ".log";
-        _logs.open(log_file_name);
+        const std::string log_file_name = "logs-" + out.str() + ".log.json";
+        _logs.open(LOG_FOLDER_PATH + log_file_name);
+        _logs << "[" << std::endl;
     }
 
     LogManager::~LogManager()
     {
         if (_logs.is_open())
         {
+            _logs << std::endl << "]" << std::endl;
             _logs.close();
         }
     }
@@ -50,30 +54,39 @@ namespace Log
     void LogManager::log(const std::string& message)
     {
         std::ostringstream out;
-        out << getTimeString() << " | " << "?USER?" << " | " << message;
+        if (!_first_log) { out << "," << std::endl; }
+        out << "\t{\"timestamp\" : \"" << getTimeString() << "\", \"from\" : \"???\", \"message\" : \"" << message << "\"}";
         writeLog(out.str());
+        _first_log = false;
     }
 
     void LogManager::log(const std::string& message, const std::exception& e)
     {
         std::ostringstream out;
-        out << getTimeString() << " | " << "?USER?" << " | " << message
-            << " | Exception: " << e.what();
+
+        if (!_first_log) { out << "," << std::endl; }
+        out << "\t{\"timestamp\" : \"" << getTimeString() << "\", \"from\" : \"???\", \"message\" : \"" << message << "\", \"exception\" : \"" << e.what() << "\"}";
         writeLog(out.str());
+        _first_log = false;
     }
 
-    void LogManager::log(std::string user, const std::string& message)
+    void LogManager::log(std::string from, const std::string& message)
     {
         std::ostringstream out;
-        out << getTimeString() << " | " << user << " | " << message;
+        
+        if (!_first_log) { out << "," << std::endl; }
+        out << "\t{\"timestamp\" : \"" << getTimeString() << "\", \"from\" : \"" << from << "\", \"message\" : \"" << message << "\"}";
         writeLog(out.str());
+        _first_log = false;
     }
 
-    void LogManager::log(std::string user, const std::string& message, const std::exception& e)
+    void LogManager::log(std::string from, const std::string& message, const std::exception& e)
     {
         std::ostringstream out;
-        out << getTimeString() << " | " << user << " | " << message
-            << " | Exception: " << e.what();
+
+        if (!_first_log) { out << "," << std::endl; }
+        out << "\t{\"timestamp\" : \"" << getTimeString() << "\", \"from\" : \"" << from << "\", \"message\" : \"" << message << "\", \"exception\" : \"" << e.what() << "\"}";
         writeLog(out.str());
+        _first_log = false;
     }
 }

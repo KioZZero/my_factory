@@ -60,10 +60,12 @@ namespace Factory::Core
 
     int Core::loop(void)
     {
-        while (LOOP)
-        {
-            manageInput();
-        }
+        // while (LOOP)
+        // {
+        //     manageInput();
+        //     _sfmlManager->getInput();
+        //     _sfmlManager->render();
+        // }
 
         MSG(NAME << " Stopping...");
         return OUTPUT::NOERROR;

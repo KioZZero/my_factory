@@ -43,12 +43,37 @@ namespace Factory::SFML
 
     void SFMLManager::getInput()
     {
-
+        if (!_window) {
+            return;
+        }
+        if (_window->hasFocus()) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) { }
+        }
+        
+        sf::Event sfEvent;
+        while (_window->pollEvent(sfEvent)) {
+            if (sfEvent.type == sf::Event::Closed || (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::Escape)) {
+                _window->close();
+                // set event to quit
+            }
+        }
     }
     
     void SFMLManager::render()
     {
-
+        if (_window) {
+            _window->clear(sf::Color(15, 15, 25));
+            _window->display();
+        }
     }
 
 }

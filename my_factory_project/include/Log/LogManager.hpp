@@ -16,6 +16,7 @@ namespace Log
     {
         private:
             std::ofstream _logs;
+            bool _first_log = true;
 
             LogManager();
             ~LogManager();
@@ -33,8 +34,8 @@ namespace Log
 
             void log(const std::string& message);
             void log(const std::string& message, const std::exception& e);
-            void log(std::string user, const std::string& message);
-            void log(std::string user, const std::string& message, const std::exception& e);
+            void log(std::string from, const std::string& message);
+            void log(std::string from, const std::string& message, const std::exception& e);
     };
 }
 
