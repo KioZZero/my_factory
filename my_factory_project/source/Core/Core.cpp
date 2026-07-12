@@ -16,27 +16,27 @@ namespace Factory::Core
         try {
             _server = std::make_unique<Factory::Server::ServerManager>();
             _server->init(host, port);
-            logger.log("SYSTEM", "Server initialized successfully");
+            logger.log(NAME, "Server initialized successfully");
         } catch (const std::exception& e) {
-            logger.log("SYSTEM", "Server init failed", e);
+            logger.log(NAME, "Server init failed", e);
             ERR(NAME << " Server init failed: " << e.what());
             return OUTPUT::ERROR;
         }
         try {
             _preloader = std::make_unique<Factory::Preloader::PreloaderManager>();
             _preloader->init();
-            logger.log("SYSTEM", "Preloader initialized successfully");
+            logger.log(NAME, "Preloader initialized successfully");
         } catch (const std::exception& e) {
-            logger.log("SYSTEM", "Preloader init failed", e);
+            logger.log(NAME, "Preloader init failed", e);
             ERR(NAME << " Preloader init failed: " << e.what());
             return OUTPUT::ERROR;
         }
         try {
             _sfmlManager = std::make_unique<Factory::SFML::SFMLManager>();
             _sfmlManager->init();
-            logger.log("SYSTEM", "SFML manager initialized successfully");
+            logger.log(NAME, "SFML manager initialized successfully");
         } catch (const std::exception& e) {
-            logger.log("SYSTEM", "SFML manager init failed", e);
+            logger.log(NAME, "SFML manager init failed", e);
             ERR(NAME << " SFML manager init failed: " << e.what());
             return OUTPUT::ERROR;
         }
@@ -60,12 +60,12 @@ namespace Factory::Core
 
     int Core::loop(void)
     {
-        // while (LOOP)
-        // {
-        //     manageInput();
-        //     _sfmlManager->getInput();
-        //     _sfmlManager->render();
-        // }
+        while (LOOP)
+        {
+             manageInput();
+             _sfmlManager->getInput();
+             _sfmlManager->render();
+        }
 
         MSG(NAME << " Stopping...");
         return OUTPUT::NOERROR;

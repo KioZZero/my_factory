@@ -7,7 +7,7 @@
 #include "SFMLManager.hpp"
 #include "LogManager.hpp"
 
-#define NAME "[CORE]"
+#define NAME "CORE"
 
 namespace Factory::Core
 {

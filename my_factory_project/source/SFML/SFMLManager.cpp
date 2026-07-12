@@ -27,15 +27,15 @@ namespace Factory::SFML
             _window->setSize(sf::Vector2u(1280, 720));
             _window->setFramerateLimit(120);
         } catch (const std::exception& e) {
-            logger.log("SFML", "Error: could not create window.", e);
-            ERR("[SFML] Error: could not create window.");
+            logger.log(NAME, "Error: could not create window.", e);
+            ERR(NAME << " Error: could not create window.");
             return OUTPUT::ERROR;
         }
         if (_base_text_font.loadFromFile("resources/fonts/Ubuntu.ttf")) {
             _fontLoaded = true;
         } else {
-            logger.log("SFML", "Warning: could not load a system font. Text will be disabled.");
-            ERR("[SFML] Warning: could not load a system font. Text will be disabled.");
+            logger.log(NAME, "Warning: could not load a system font. Text will be disabled.");
+            ERR(NAME << " Warning: could not load a system font. Text will be disabled.");
             return OUTPUT::ERROR;
         }
         return OUTPUT::NOERROR;
@@ -47,16 +47,10 @@ namespace Factory::SFML
             return;
         }
         if (_window->hasFocus()) {
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) { }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) { }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) { }
         }
         
         sf::Event sfEvent;

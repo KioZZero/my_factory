@@ -11,6 +11,8 @@
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
+#define NAME "SFML"
+
 namespace Factory::SFML
 {
     class SFMLManager
