@@ -4,11 +4,15 @@
 #include <ctime>
 #include <exception>
 #include <fstream>
+#include <filesystem>
 #include <iomanip>
 #include <iostream>
 #include <ostream>
 #include <sstream>
 #include <string>
+
+#define MSG(msg) std::cout << msg << std::endl
+#define ERR(msg) std::cerr << msg << std::endl
 
 namespace Log
 {
@@ -33,9 +37,11 @@ namespace Log
             LogManager& operator=(LogManager&&) = delete;
 
             void log(const std::string& message);
-            void log(const std::string& message, const std::exception& e);
             void log(std::string from, const std::string& message);
+
+            void log(const std::string& message, const std::exception& e);
             void log(std::string from, const std::string& message, const std::exception& e);
+            void log(std::string from, const std::string& message, const std::string& e);
     };
 }
 

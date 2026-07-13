@@ -6,12 +6,17 @@
 #include "SimplifiedSFML.hpp"
 #include "LogManager.hpp"
 
+#include "Components/PlayerComponent.hpp"
+#include "Components/CircleComponent.hpp"
+#include "Components/LineComponent.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Audio.hpp>
 
-#define NAME "SFML"
+#include <vector>
+#include <memory>
 
 namespace Factory::SFML
 {
@@ -23,6 +28,10 @@ namespace Factory::SFML
             std::unique_ptr<Factory::SFML::SimplifiedSFML> _simplifiedSFML;
             sf::Font _base_text_font;
             bool _fontLoaded;
+
+            std::unique_ptr<PlayerComponent> _player;
+            std::unique_ptr<CircleComponent> _circle;
+            std::unique_ptr<LineComponent> _line;
         public:
             SFMLManager();
             ~SFMLManager();
@@ -30,6 +39,7 @@ namespace Factory::SFML
             int init();
             void getInput();
             void render();
+            const sf::RenderWindow& getWindow(void);
     };
 }
 

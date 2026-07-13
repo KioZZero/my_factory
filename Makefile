@@ -7,9 +7,8 @@ INCLUDE_DIR     =   $(PROJECT_DIR)/include
 SOURCE_DIR      =   $(PROJECT_DIR)/source
 
 INCLUDE_DIRS    =   $(INCLUDE_DIR) \
-					$(INCLUDE_DIR)/Game/Character \
-					$(INCLUDE_DIR)/Game/Component \
 					$(INCLUDE_DIR)/SFML \
+					$(INCLUDE_DIR)/SFML/Components \
 					$(INCLUDE_DIR)/Log \
 					$(INCLUDE_DIR)/Core \
 					$(INCLUDE_DIR)/Utils \
@@ -22,10 +21,12 @@ SOURCES_FILES   =   $(SOURCE_DIR)/main.cpp \
 					$(SOURCE_DIR)/Core/Server.cpp \
 					$(SOURCE_DIR)/SFML/SFMLManager.cpp \
 					$(SOURCE_DIR)/SFML/SimplifiedSFML.cpp \
-					$(SOURCE_DIR)/Game/Character/ACharacter.cpp \
-					$(SOURCE_DIR)/Game/Character/CCharacter.cpp \
-					$(SOURCE_DIR)/Game/Character/OtherCharacter.cpp \
-					$(SOURCE_DIR)/Game/Character/PlayerCharacter.cpp \
+					$(SOURCE_DIR)/SFML/Components/AComponent.cpp \
+					$(SOURCE_DIR)/SFML/Components/CComponent.cpp \
+					$(SOURCE_DIR)/SFML/Components/PlayerComponent.cpp \
+					$(SOURCE_DIR)/SFML/Components/MessageComponent.cpp \
+					$(SOURCE_DIR)/SFML/Components/CircleComponent.cpp \
+					$(SOURCE_DIR)/SFML/Components/LineComponent.cpp \
 					$(SOURCE_DIR)/Log/LogManager.cpp \
 
 NAME            =   my_factory

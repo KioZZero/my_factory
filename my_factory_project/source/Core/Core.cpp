@@ -16,28 +16,25 @@ namespace Factory::Core
         try {
             _server = std::make_unique<Factory::Server::ServerManager>();
             _server->init(host, port);
-            logger.log(NAME, "Server initialized successfully");
+            logger.log("CORE", "Server initialized successfully");
         } catch (const std::exception& e) {
-            logger.log(NAME, "Server init failed", e);
-            ERR(NAME << " Server init failed: " << e.what());
+            logger.log("CORE", "Server init failed", e);
             return OUTPUT::ERROR;
         }
         try {
             _preloader = std::make_unique<Factory::Preloader::PreloaderManager>();
             _preloader->init();
-            logger.log(NAME, "Preloader initialized successfully");
+            logger.log("CORE", "Preloader initialized successfully");
         } catch (const std::exception& e) {
-            logger.log(NAME, "Preloader init failed", e);
-            ERR(NAME << " Preloader init failed: " << e.what());
+            logger.log("CORE", "Preloader init failed", e);
             return OUTPUT::ERROR;
         }
         try {
             _sfmlManager = std::make_unique<Factory::SFML::SFMLManager>();
             _sfmlManager->init();
-            logger.log(NAME, "SFML manager initialized successfully");
+            logger.log("CORE", "SFML manager initialized successfully");
         } catch (const std::exception& e) {
-            logger.log(NAME, "SFML manager init failed", e);
-            ERR(NAME << " SFML manager init failed: " << e.what());
+            logger.log("CORE", "SFML manager init failed", e);
             return OUTPUT::ERROR;
         }
         return OUTPUT::NOERROR;
@@ -46,10 +43,9 @@ namespace Factory::Core
     int Core::run(std::string host, int port)
     {
         if (init(host, port) != OUTPUT::NOERROR) {
-            ERR(NAME << " Failed to initialize core");
+            ERR("CORE Failed to initialize core");
             return OUTPUT::ERROR;
         }
-        MSG(NAME << " Running...");
         return loop();
     }
 
@@ -60,14 +56,13 @@ namespace Factory::Core
 
     int Core::loop(void)
     {
-        while (LOOP)
+        MSG("CORE Running...");
+        while (_sfmlManager->getWindow().isOpen())
         {
-             manageInput();
-             _sfmlManager->getInput();
-             _sfmlManager->render();
+            manageInput();
+            _sfmlManager->render();
         }
-
-        MSG(NAME << " Stopping...");
+        MSG("CORE Stopping...");
         return OUTPUT::NOERROR;
     }
 }

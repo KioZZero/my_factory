@@ -1,13 +1,11 @@
 #ifndef CORE_HPP
-#define CORE_HPP
+    #define CORE_HPP
 
 #include "Utils.hpp"
 #include "Server.hpp"
 #include "Preloader.hpp"
 #include "SFMLManager.hpp"
 #include "LogManager.hpp"
-
-#define NAME "CORE"
 
 namespace Factory::Core
 {
