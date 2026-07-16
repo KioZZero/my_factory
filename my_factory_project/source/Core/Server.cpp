@@ -10,4 +10,14 @@ namespace Factory::Server
         _port = port;
         return OUTPUT::NOERROR;
     }
+                
+    int ServerManager::getPort()
+    {
+        return _port;
+    }
+
+    std::string ServerManager::getHost()
+    {
+        return _host;
+    }
 }

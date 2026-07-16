@@ -25,6 +25,7 @@ SOURCES_FILES   =   $(SOURCE_DIR)/main.cpp \
 					$(SOURCE_DIR)/SFML/Components/CComponent.cpp \
 					$(SOURCE_DIR)/SFML/Components/PlayerComponent.cpp \
 					$(SOURCE_DIR)/SFML/Components/MessageComponent.cpp \
+					$(SOURCE_DIR)/SFML/Components/RectangleComponent.cpp \
 					$(SOURCE_DIR)/SFML/Components/CircleComponent.cpp \
 					$(SOURCE_DIR)/SFML/Components/LineComponent.cpp \
 					$(SOURCE_DIR)/Log/LogManager.cpp \

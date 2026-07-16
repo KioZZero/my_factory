@@ -14,10 +14,12 @@ namespace Factory::Server
             ServerManager();
             ~ServerManager() = default;
             
+            int getPort();
+            std::string getHost();
             int init(std::string host, int port);
             int run();
             void getEvents();
     };
-}
+} // Factory::Server
 
 #endif // SERVER_HPP

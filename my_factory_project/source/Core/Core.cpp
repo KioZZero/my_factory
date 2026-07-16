@@ -37,6 +37,13 @@ namespace Factory::Core
             logger.log("CORE", "SFML manager init failed", e);
             return OUTPUT::ERROR;
         }
+
+        // temporaire
+        _sfmlManager->addPlayer(std::make_unique<Factory::SFML::PlayerComponent>(
+            sf::Vector2f(640.f - 16.f, 360.f - 16.f)
+        ));
+        logger.log("CORE", "Default PlayerComponent added");
+
         return OUTPUT::NOERROR;
     }
 

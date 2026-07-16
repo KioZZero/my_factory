@@ -13,6 +13,6 @@ namespace Factory::Parser
 
             int init(void);
     };
-}
+} // Factory::Parser
 
 #endif // PARSER_HPP

@@ -26,6 +26,6 @@ namespace Factory::Core
         int run(std::string host, int port);
         int loop(void);
     };
-}
+} // Factory::Core
 
 #endif

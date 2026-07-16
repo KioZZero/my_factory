@@ -24,6 +24,11 @@ namespace Factory::SFML
         _position = position;
     }
 
+    void AComponent::move(sf::Vector2f offset)
+    {
+        _position += offset;
+    }
+
     float AComponent::getDeltaTime()
     {
         return _delta_time.restart().asSeconds();

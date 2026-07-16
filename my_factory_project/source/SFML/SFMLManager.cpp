@@ -58,16 +58,13 @@ namespace Factory::SFML
 
         const float dt = _delta.restart().asSeconds();
 
-        if (_player) {
-            _player->update(dt);
+        for (auto* player : _player) {
+            player->update(dt);
         }
 
         sf::Event sfEvent;
         while (_window->pollEvent(sfEvent)) {
-            if (sfEvent.type == sf::Event::Closed ||
-                (sfEvent.type == sf::Event::KeyPressed &&
-                 sfEvent.key.code == sf::Keyboard::Escape))
-            {
+            if (sfEvent.type == sf::Event::Closed || (sfEvent.type == sf::Event::KeyPressed && sfEvent.key.code == sf::Keyboard::Escape)) {
                 _window->close();
             }
         }
@@ -80,18 +77,20 @@ namespace Factory::SFML
         }
 
         _window->clear(sf::Color(15, 15, 25));
-        if (_circle) {
-            _circle->render(*_window);
-        }
-        if (_line) {
-            _line->render(*_window);
-        }
-        if (_player) {
-            _player->render(*_window);
-        }
 
+        for (auto& component : _components) {
+            if (component && component->isActive()) {
+                component->render(*_window);
+            }
+        }
         _window->display();
     }
+
+    bool SFMLManager::isOpen() const
+    {
+        return _window && _window->isOpen();
+    }
+
     const sf::RenderWindow& SFMLManager::getWindow(void)
     {
         if (_window) {
@@ -99,5 +98,25 @@ namespace Factory::SFML
         }
         logger.log("SFML", "tried to access window but it is not initialized");
         throw std::runtime_error("Window not initialized");
+    }
+
+    sf::Font& SFMLManager::getFont()
+    {
+        return _base_text_font;
+    }
+
+    void SFMLManager::addComponent(std::unique_ptr<IComponent> component)
+    {
+        if (component) {
+            _components.emplace_back(std::move(component));
+        }
+    }
+
+    void SFMLManager::addPlayer(std::unique_ptr<PlayerComponent> player)
+    {
+        if (player) {
+            _player.emplace_back(player.get());
+            _components.emplace_back(std::move(player));
+        }
     }
 }

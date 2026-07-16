@@ -23,6 +23,7 @@ namespace Factory::SFML
 
             sf::Vector2f getPosition() const;
             void setPosition(sf::Vector2f position);
+            virtual void move(sf::Vector2f offset);
 
             float getDeltaTime();
     };

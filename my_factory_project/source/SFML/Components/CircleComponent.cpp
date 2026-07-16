@@ -13,7 +13,9 @@ namespace Factory::SFML
     }
 
     void CircleComponent::update(float dt)
-    {}
+    {
+        (void)dt;
+    }
 
     void CircleComponent::render(sf::RenderWindow& window)
     {
@@ -21,6 +23,12 @@ namespace Factory::SFML
             return;
         }
         window.draw(_shape);
+    }
+
+    void CircleComponent::move(sf::Vector2f offset)
+    {
+        AComponent::move(offset);
+        _shape.setPosition(_position - sf::Vector2f(_shape.getRadius(), _shape.getRadius()));
     }
 
     float CircleComponent::getRadius() const

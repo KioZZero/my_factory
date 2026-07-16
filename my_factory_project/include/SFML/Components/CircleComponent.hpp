@@ -18,6 +18,7 @@ namespace Factory::SFML
 
             void update(float dt) override;
             void render(sf::RenderWindow& window) override;
+            void move(sf::Vector2f offset) override;
 
             float getRadius() const;
             void setRadius(float radius);

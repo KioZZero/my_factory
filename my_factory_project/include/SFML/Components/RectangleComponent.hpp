@@ -18,6 +18,7 @@ namespace Factory::SFML
 
             void update(float dt) override;
             void render(sf::RenderWindow& window) override;
+            void move(sf::Vector2f offset) override;
 
             sf::Vector2f getSize() const;
             void setSize(sf::Vector2f size);

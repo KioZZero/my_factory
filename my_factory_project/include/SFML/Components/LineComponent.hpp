@@ -23,6 +23,7 @@ namespace Factory::SFML
 
             void update(float dt) override;
             void render(sf::RenderWindow& window) override;
+            void move(sf::Vector2f offset) override;
 
             sf::Vector2f getEnd() const;
             float getThickness() const;

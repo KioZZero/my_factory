@@ -13,6 +13,7 @@ namespace Factory::SFML
 
     void MessageComponent::update(float dt)
     {
+        (void)dt;
     }
 
     void MessageComponent::render(sf::RenderWindow& window)

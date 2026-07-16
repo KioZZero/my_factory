@@ -37,6 +37,7 @@ namespace Factory::SFML
 
     void LineComponent::update(float dt)
     {
+        (void)dt;
     }
 
     void LineComponent::render(sf::RenderWindow& window)
@@ -45,6 +46,13 @@ namespace Factory::SFML
             return;
         }
         window.draw(_vertices);
+    }
+
+    void LineComponent::move(sf::Vector2f offset)
+    {
+        AComponent::move(offset);
+        _end += offset;
+        _rebuild();
     }
 
     sf::Vector2f LineComponent::getEnd() const

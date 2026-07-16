@@ -13,6 +13,7 @@ namespace Factory::SFML
 
     void RectangleComponent::update(float dt)
     {
+        (void)dt;
     }
 
     void RectangleComponent::render(sf::RenderWindow& window)
@@ -21,6 +22,12 @@ namespace Factory::SFML
             return;
         }
         window.draw(_shape);
+    }
+
+    void RectangleComponent::move(sf::Vector2f offset)
+    {
+        AComponent::move(offset);
+        _shape.setPosition(_position);
     }
 
     sf::Vector2f RectangleComponent::getSize() const

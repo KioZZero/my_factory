@@ -4,7 +4,16 @@ namespace Factory::SFML
 {
     PlayerComponent::PlayerComponent(sf::Vector2f position, sf::Vector2f size, float speed, sf::Color color, bool active) : AComponent(position, active), _speed(speed)
     {
-        _shape.setSize(size);
+        const float size_x = size.x / 1.f;
+        const float size_y = size.y / 1.f;
+
+        _shape.setPointCount(6);
+        _shape.setPoint(0, sf::Vector2f(-2.f * size_x, 0.f));
+        _shape.setPoint(1, sf::Vector2f(-1.f * size_x, 1.f * size_y));
+        _shape.setPoint(2, sf::Vector2f(0.f, 5.f * size_y));
+        _shape.setPoint(3, sf::Vector2f(1.f * size_x, 1.f * size_y));
+        _shape.setPoint(4, sf::Vector2f(2.f * size_x, 0.f));
+        _shape.setPoint(5, sf::Vector2f(0.f, -2.f * size_y));
         _shape.setFillColor(color);
         _shape.setPosition(position);
     }
@@ -39,6 +48,12 @@ namespace Factory::SFML
             return;
         }
         window.draw(_shape);
+    }
+
+    void PlayerComponent::move(sf::Vector2f offset)
+    {
+        AComponent::move(offset);
+        _shape.setPosition(_position);
     }
 
     float PlayerComponent::getSpeed() const
